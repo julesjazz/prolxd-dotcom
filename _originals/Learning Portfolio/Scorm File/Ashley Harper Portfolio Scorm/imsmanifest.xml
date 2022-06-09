@@ -1,0 +1,101 @@
+<?xml version="1.0" ?>
+<manifest identifier="JLwBAGCIdtwr32qeZuoNxelSUEbU38hkPs98W55J" version="1"
+  xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2"
+  xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.imsproject.org/xsd/imscp_rootv1p1p2 imscp_rootv1p1p2.xsd
+                      http://www.imsglobal.org/xsd/imsmd_rootv1p2p1 imsmd_rootv1p2p1.xsd
+                      http://www.adlnet.org/xsd/adlcp_rootv1p2 adlcp_rootv1p2.xsd">
+  <metadata>
+    <schema>ADL SCORM</schema>
+    <schemaversion>1.2</schemaversion>
+    <adlcp:location>metadata.xml</adlcp:location>
+  </metadata>
+  <organizations default="articulate_rise">
+      <organization identifier="articulate_rise">
+      <title>Ashley Portfolio - DataLayer</title>
+      <item identifier="i1" identifierref="r1" isvisible="true">
+        <title>Ashley Portfolio - DataLayer</title>
+        <adlcp:datafromlms>eyJjcHYiOiJQczk4VzU1SiJ9</adlcp:datafromlms>
+      </item>
+    </organization>
+  </organizations>
+  <resources>
+    <resource identifier="r1" type="webcontent" adlcp:scormtype="sco" href="scormdriver/indexAPI.html">
+      <!-- SCORMDRIVER STUFF -->
+      <file href="scormdriver/indexAPI.html" />
+      <file href="scormdriver/preloadIntegrity.js" />
+      <file href="scormdriver/driverOptions.js" />
+      <file href="scormdriver/AICCComm.html" />
+      <file href="scormdriver/auto-scripts/AutoBookmark.js" />
+      <file href="scormdriver/auto-scripts/AutoCompleteSCO.js" />
+      <file href="scormdriver/auto-scripts/CourseExit.js" />
+      <file href="scormdriver/blank.html" />
+      <file href="scormdriver/goodbye.html" />
+      <file href="scormdriver/scormdriver.js" />
+      <file href="scormdriver/browsersniff.js" />
+
+      <!-- RUNTIME COMMON STUFF -->
+      <file href="scormcontent/index.html" />
+      <file href="scormcontent/lib/main.bundle.js"/>
+
+      
+        <file href="scormcontent/lib/fonts/icomoon.ttf"/>
+        <file href="scormcontent/lib/fonts/icomoon.woff"/>
+
+        <file href="scormcontent/lib/icomoon.css"/>
+        <file href="scormcontent/lib/main.bundle.css"/>
+        <file href="scormcontent/lib/player-0.0.11.min.js"/>
+        <file href="scormcontent/lib/lzwcompress.js"/>
+      
+
+      <!-- RUNTIME CONTENT STUFF -->
+      <file href="scormcontent/lib/fonts/Lato-Black.woff" />
+<file href="scormcontent/lib/fonts/Lato-Italic.woff" />
+<file href="scormcontent/lib/fonts/Lato-Bold.woff" />
+<file href="scormcontent/lib/fonts/Lato-Regular.woff" />
+<file href="scormcontent/lib/fonts/Lato-Light.woff" />
+<file href="scormcontent/lib/fonts/Merriweather-Black.woff" />
+<file href="scormcontent/lib/fonts/Merriweather-Italic.woff" />
+<file href="scormcontent/lib/fonts/Merriweather-Bold.woff" />
+<file href="scormcontent/lib/fonts/Merriweather-Regular.woff" />
+<file href="scormcontent/lib/fonts/Merriweather-Light.woff" />
+<file href="scormcontent/assets/H3Ak5n5wWN8OEWvg_small.png" />
+<file href="scormcontent/assets/iBIYIUHOzzZaAwGU_k90UVPlNx9c1HABy.png" />
+<file href="scormcontent/assets/AkgcfMysXSmNhnxc_bhjDj-VbYu6z6xQn.jpg" />
+<file href="scormcontent/assets/pDaMKK36T4m_sykB_transcoded-a5CoG7VHef0g2l4e-DataLayer%20Data%20Engine-00001.png" />
+<file href="scormcontent/assets/F5dxlo2eIVfhF-aK_transcoded-a5CoG7VHef0g2l4e-DataLayer%20Data%20Engine.mp4" />
+<file href="scormcontent/assets/g42dt77iZCpFJF0O_niWFcN5NFxDoJbiE-DataLayer%20Data%20Engine.vtt" />
+<file href="scormcontent/assets/ebeXFRGAjdZIthCy_Xv-XScJKAtipsv-e-DataLayer%20Data%20Engine.es-es.es.vtt" />
+<file href="scormcontent/assets/q7wvQ9e-ncBi8vLO_r_N6glsJgxxSDbow-DataLayer%20Data%20Engine.ja.vtt" />
+<file href="scormcontent/assets/uwE6srBfFNTXPA9__OosEgvxytLPpQsqV.jpg" />
+<file href="scormcontent/assets/uvdOZUKxct0C0L-c_g27y1H-06ZD6Z3qd.jpg" />
+<file href="scormcontent/assets/WczIea7AF5PbhUUB_uVjv7RkccictkTgy.jpg" />
+<file href="scormcontent/assets/5RAiVPbLAo3uN2hd_transcoded-UAtYo_qnWJK1cKM1-DataLayer%20Backgrounder-00001.png" />
+<file href="scormcontent/assets/q6tuqVG9pFTdcn0d_transcoded-UAtYo_qnWJK1cKM1-DataLayer%20Backgrounder.mp4" />
+<file href="scormcontent/assets/oPj_WweGLJ4BgGWj_Ph1QdVFP-6DJjZk4-DataLayer%20Backgrounder%20%281%29.vtt" />
+<file href="scormcontent/assets/Cv1rMCleTnimHwN9_pg45Y9tBozHkY0WP-DataLayer%20Backgrounder.es-es.es.vtt" />
+<file href="scormcontent/assets/U8jZaSKrtIbvcePm_W0GuHwRiYXTXtwk7-DataLayer%20Backgrounder.ja.vtt" />
+<file href="scormcontent/assets/T0dAa2lOqDDACGSR_HEVk6iLSbSC-oG00.jpg" />
+<file href="scormcontent/assets/4GlB_YezW3Zi6oIT_Dx2TePFpNZiGiFpj.jpg" />
+<file href="scormcontent/assets/RrH0YMOvGFOVRHIc_ZOHnbYp4IJB1RbYy.jpg" />
+<file href="scormcontent/assets/SIxwT0zwI467tZqb_transcoded-w1D2J20IeHQ2srKE-DataLayer%20Data%20Server%20Overview-00001.png" />
+<file href="scormcontent/assets/AgnjvdKdRURwk_k3_transcoded-w1D2J20IeHQ2srKE-DataLayer%20Data%20Server%20Overview.mp4" />
+<file href="scormcontent/assets/RjVl3nW_WDT0D4U2_giicoFIp4hF1KNsa-DataLayer%20Data%20Server.vtt" />
+<file href="scormcontent/assets/aqJfkuWPn-IUa_fs_IToy9aN_IFXLbVgW-DataLayer%20Data%20Server%20Overview.es-es.es.vtt" />
+<file href="scormcontent/assets/XS_sHsOG_Jj97F66_IlN50AXW8D_7ZHWx-DataLayer%20Backgrounder.ja.vtt" />
+<file href="scormcontent/assets/oy1CjXl1xCm-5fXT_208u4AOVjy3q7uiG.jpg" />
+<file href="scormcontent/assets/nDBdBunPOce_Wuem_nVWKcNeFulgC2mBL.jpg" />
+<file href="scormcontent/assets/yreZGFhKeTxb5qiB_BhRWTsNF0lfbTUS0.jpg" />
+<file href="scormcontent/assets/AweL-2uqJ9GVVQID_fIJDthvtyg-d2-Ua.jpg" />
+<file href="scormcontent/assets/QTauGtUrjqHg9W7w_zoWdgeYeT5oSG_QI.jpg" />
+<file href="scormcontent/assets/R-PJnIfksBjRC-E6_transcoded-aV6gMaBsuj7d1m4W-DataLayer%20Ask%20Data-00001.png" />
+<file href="scormcontent/assets/A_95ayTpaNmkxiz6_transcoded-aV6gMaBsuj7d1m4W-DataLayer%20Ask%20Data.mp4" />
+<file href="scormcontent/assets/R2fanzxG6uRTQVBx_KvgZ6od3pTaSHlCJ-DataLayer%20Ask%20Data%20%281%29.vtt" />
+<file href="scormcontent/assets/jzOaSOzdqpgX0un4_czWdfTY4AEYy9y5W-DataLayer%20Ask%20Data.es-es.es.vtt" />
+<file href="scormcontent/assets/ZkzBhlrUxF7cRAcS_KiYYLCb8kFEnwTeA-DataLayer%20Ask%20Data.ja.vtt" />
+<file href="scormcontent/assets/apMWxGsxBNr9FnCR_u8qIqTD_hhvsx6tP.jpg" />
+
+    </resource>
+  </resources>
+</manifest>

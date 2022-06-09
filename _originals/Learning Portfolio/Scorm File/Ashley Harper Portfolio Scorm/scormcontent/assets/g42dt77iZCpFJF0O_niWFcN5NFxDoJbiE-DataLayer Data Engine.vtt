@@ -1,0 +1,166 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.800
+Hello, and welcome to the Overview of Data Engine (Hyper) & File Store.
+
+2
+00:00:07.800 --> 00:00:14.500
+For this section, we are going to look at Data Engine, which we use the hyper database for.
+
+3
+00:00:14.500 --> 00:00:20.400
+We will discuss how the Data Engine is used, talk about federated query calls,
+
+4
+00:00:20.400 --> 00:00:25.766
+and discuss the functionality of File Store as well.
+
+5
+00:00:25.766 --> 00:00:36.032
+You can see here a visualization of how data engine and file store work with the rest of the data layer.
+
+6
+00:00:36.033 --> 00:00:39.033
+So first up, let’s talk about data engine.
+
+7
+00:00:39.033 --> 00:00:44.033
+The data engine handles the creation of and querying of extract files,
+
+8
+00:00:44.033 --> 00:00:48.966
+so it works together with the backgrounder and the file store process, and it may also be called by
+
+9
+00:00:48.966 --> 00:00:53.932
+the data server process when an extract is published.
+
+10
+00:00:53.933 --> 00:01:04.799
+VizQL Server will make calls to it when it needs to render a view that uses the extract as the data source.
+
+11
+00:01:04.800 --> 00:01:07.066
+So... what is Hyper?
+
+12
+00:01:07.066 --> 00:01:11.999
+Hyper is a column-based database and an in-memory process,
+
+13
+00:01:12.000 --> 00:01:20.300
+which has significant speed advantages over the older engine Tableau used, especially for databases with higher row counts.
+
+14
+00:01:20.300 --> 00:01:25.666
+Hyper is also called by other processes to create extracts.
+
+15
+00:01:25.666 --> 00:01:31.766
+The Hyper API can be used to automate interactions with .hyper Tableau extract files -
+
+16
+00:01:31.766 --> 00:01:36.632
+including to create new or open existing extract files.
+
+17
+00:01:36.633 --> 00:01:46.566
+Additionally, the Hyper API can add, delete, update or read data from .hyper files.
+
+18
+00:01:46.566 --> 00:01:50.999
+So, let's take a look at when data engine is used.
+
+19
+00:01:51.000 --> 00:02:01.133
+When viz portal publishes an extract, or backgrounder refreshes one, Data Engine is called to create the required .hyper file.
+
+20
+00:02:01.133 --> 00:02:10.766
+Data engine is also involved when we need to make federated query calls - a query of a database where we get back temporary data.
+
+21
+00:02:10.766 --> 00:02:19.599
+For example, if we need to retrieve data from two different datasources for a workbook, we’ll federate the query to the 2 datasources.
+
+22
+00:02:19.600 --> 00:02:27.066
+Data Engine is also tableau server’s query federation engine.
+
+23
+00:02:27.066 --> 00:02:31.566
+So, next up, let’s talk about File Store, which stores files.
+
+24
+00:02:31.566 --> 00:02:36.632
+Pretty straightforward! A little more precisely, it’s responsible for handling the storage
+
+25
+00:02:36.633 --> 00:02:41.699
+of extract files throughout the tableau server environment.
+
+26
+00:02:41.700 --> 00:02:49.033
+This means that for a multi-node environment, File Store will be copying and synchronizing files
+
+27
+00:02:49.033 --> 00:02:56.366
+between nodes in the cluster, so every worker has access to the extracts.
+
+28
+00:02:56.366 --> 00:03:07.466
+So, when a new extract is published or refreshed, a sync job will be created to copy the new file to the other workers with a file store.
+
+29
+00:03:07.466 --> 00:03:11.299
+When an extract is replaced by a new one with a full refresh,
+
+30
+00:03:11.300 --> 00:03:18.933
+file store will process the resulting reap job - deleting the extract from all configured nodes.
+
+31
+00:03:18.933 --> 00:03:23.966
+File store will also be called during backups to provide the extract files,
+
+32
+00:03:23.966 --> 00:03:31.566
+it will only backup one file store node during a backup operation in a multi-node environment.
+
+33
+00:03:31.566 --> 00:03:39.699
+Decommissioning puts the File Store instance into read-only mode and copies any unique data contained in
+
+34
+00:03:39.700 --> 00:03:46.166
+the instance to the other File Stores in the node cluster.
+
+35
+00:03:46.166 --> 00:03:57.666
+So, if a customer attempts to remove File Store without decommissioning, they will be prompted to decommission first.
+
+36
+00:03:57.666 --> 00:04:03.399
+Now, one thing to keep in mind is that Data Engine and File Store work closely together,
+
+37
+00:04:03.400 --> 00:04:07.566
+however they do not directly contact each other.
+
+38
+00:04:07.566 --> 00:04:13.032
+Instead, they both provide and get information to the data repository.
+
+39
+00:04:13.033 --> 00:04:24.299
+So, if data engine needs to know where an extract is stored, it queries the repository, not file store directly.
+
+40
+00:04:24.300 --> 00:04:32.366
+So, in summary, data engine is the federation query engine and the extract querying and creation component.
+
+41
+00:04:32.366 --> 00:04:39.999
+File Store is our replication component that copies extract files and keeps them synchronized in the nodes.
+

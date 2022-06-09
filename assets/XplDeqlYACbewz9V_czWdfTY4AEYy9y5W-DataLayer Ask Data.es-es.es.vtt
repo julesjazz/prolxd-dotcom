@@ -1,0 +1,1018 @@
+﻿WEBVTT
+
+1
+00:00:01.060 --> 00:00:04.000
+<v ->Hola, y bienvenidos a la visión general de Ask Data</v>
+
+2
+00:00:04.000 --> 00:00:06.390
+para una audiencia técnica.
+
+3
+00:00:06.390 --> 00:00:07.731
+Este video ha sido creado
+
+4
+00:00:07.731 --> 00:00:09.640
+para cualquiera que necesite entender
+
+5
+00:00:09.640 --> 00:00:12.083
+Ask Data desde una perspectiva técnica.
+
+6
+00:00:14.200 --> 00:00:15.291
+Así que para esta sección,
+
+7
+00:00:15.291 --> 00:00:17.750
+vamos a echar un vistazo a cómo Ask Data
+
+8
+00:00:17.750 --> 00:00:19.430
+funciones en un alto nivel.
+
+9
+00:00:19.430 --> 00:00:21.140
+Antes de sumergirnos en la descripción
+
+10
+00:00:21.140 --> 00:00:24.230
+de la arquitectura de proceso subyacente.
+
+11
+00:00:24.230 --> 00:00:26.590
+También echaremos un vistazo a algunos recursos
+
+12
+00:00:26.590 --> 00:00:27.865
+que pueden ayudar a los clientes
+
+13
+00:00:27.865 --> 00:00:29.190
+a obtener los mejores resultados
+
+14
+00:00:29.190 --> 00:00:30.683
+cuando se utiliza Ask Data.
+
+15
+00:00:32.510 --> 00:00:33.993
+Así que vamos a obtener un poco de antecedentes
+
+16
+00:00:33.993 --> 00:00:35.620
+sobre Ask Data.
+
+17
+00:00:35.620 --> 00:00:39.672
+La función Ask Data se introdujo en Tableau 2019.1
+
+18
+00:00:39.672 --> 00:00:41.460
+con grandes mejoras
+
+19
+00:00:41.460 --> 00:00:45.233
+to Ask Data entregado posteriormente en 2021.2.
+
+20
+00:00:46.400 --> 00:00:49.680
+Ask Data permite a los clientes utilizar el lenguaje natural
+
+21
+00:00:49.680 --> 00:00:52.660
+para hacer preguntas y producir ideas directamente
+
+22
+00:00:52.660 --> 00:00:54.143
+desde cualquier fuente de datos
+
+23
+00:00:54.143 --> 00:00:55.783
+publicada en el servidor de Tableau
+
+24
+00:00:55.783 --> 00:00:57.423
+o Tableau en línea.
+
+25
+00:00:58.350 --> 00:01:01.070
+Ask Data permite a los clientes escribir una pregunta
+
+26
+00:01:01.070 --> 00:01:02.540
+en un cuadro de texto
+
+27
+00:01:02.540 --> 00:01:04.430
+utilizando el lenguaje natural
+
+28
+00:01:04.430 --> 00:01:08.270
+y Tableau producirá una respuesta en forma de Viz.
+
+29
+00:01:08.270 --> 00:01:11.210
+Ask Data soporta muchas de las capacidades analíticas
+
+30
+00:01:11.210 --> 00:01:13.730
+de Tableau, incluida la agrupación,
+
+31
+00:01:13.730 --> 00:01:16.993
+clasificación, filtrado y agregaciones.
+
+32
+00:01:19.290 --> 00:01:21.270
+Si desea una excelente introducción
+
+33
+00:01:21.270 --> 00:01:23.260
+y visión general de Ask Data,
+
+34
+00:01:23.260 --> 00:01:24.810
+siempre se puede ver la presentación
+
+35
+00:01:24.810 --> 00:01:28.070
+entregado por el gerente de producto Jared Briskman
+
+36
+00:01:28.070 --> 00:01:30.380
+en la conferencia de Tableau 2021
+
+37
+00:01:30.380 --> 00:01:32.673
+que también está vinculado dentro de este curso.
+
+38
+00:01:35.840 --> 00:01:40.480
+Ahora echemos un vistazo a Ask Data Lenses.
+
+39
+00:01:40.480 --> 00:01:43.180
+Así que las lentes son un nuevo tipo de contenido,
+
+40
+00:01:43.180 --> 00:01:45.790
+como un libro de trabajo publicado o un flujo de preparación
+
+41
+00:01:45.790 --> 00:01:47.900
+específicamente para Ask Data
+
+42
+00:01:47.900 --> 00:01:51.523
+y son necesarios para las versiones 2021.2 y en adelante.
+
+43
+00:01:52.530 --> 00:01:55.860
+Las lentes se crean sobre fuentes de datos publicadas
+
+44
+00:01:55.860 --> 00:01:57.310
+y permitir la curación
+
+45
+00:01:57.310 --> 00:02:00.500
+y los gobiernos de los datos de solicitud.
+
+46
+00:02:00.500 --> 00:02:03.550
+Usar casos mientras se mantiene la fuente de la verdad
+
+47
+00:02:03.550 --> 00:02:04.923
+de la fuente de datos.
+
+48
+00:02:05.810 --> 00:02:08.350
+Ahora una fuente de datos publicada no puede tener lentes
+
+49
+00:02:08.350 --> 00:02:12.693
+que es el predeterminado, una sola lente o múltiples lentes.
+
+50
+00:02:13.540 --> 00:02:16.330
+Las lentes permiten la curación de Ask Data
+
+51
+00:02:16.330 --> 00:02:19.020
+e introducir la capacidad de seleccionar qué campos
+
+52
+00:02:19.020 --> 00:02:21.403
+están disponibles para el usuario de Ask Data.
+
+53
+00:02:22.790 --> 00:02:24.773
+Las lentes deben ser creadas
+
+54
+00:02:24.773 --> 00:02:25.820
+por cualquiera de los exploradores
+
+55
+00:02:25.820 --> 00:02:28.045
+o usuarios con licencia Creator,
+
+56
+00:02:28.045 --> 00:02:30.960
+pero son accesibles por los espectadores.
+
+57
+00:02:30.960 --> 00:02:33.226
+La conclusión es que ninguna lente
+
+58
+00:02:33.226 --> 00:02:35.618
+significa que no hay acceso a Ask Data.
+
+59
+00:02:37.982 --> 00:02:39.448
+Ahora echemos un vistazo
+
+60
+00:02:39.448 --> 00:02:40.810
+a lo que se necesita para interactuar
+
+61
+00:02:40.810 --> 00:02:44.720
+con Pedir datos en Tableau Server o Tableau Online.
+
+62
+00:02:44.720 --> 00:02:48.630
+Ahora Ask Data requiere una fuente de datos publicada
+
+63
+00:02:48.630 --> 00:02:50.013
+y para usar Ask Data,
+
+64
+00:02:50.013 --> 00:02:52.260
+los usuarios deben tener permiso para conectarse
+
+65
+00:02:52.260 --> 00:02:54.730
+a la fuente de datos subyacente.
+
+66
+00:02:54.730 --> 00:02:56.430
+Una cosa a tener en cuenta es que
+
+67
+00:02:56.430 --> 00:02:59.540
+si una fuente de datos tiene permisos de nivel de fila,
+
+68
+00:02:59.540 --> 00:03:03.050
+esos permisos también se aplican a los Datos de solicitud.
+
+69
+00:03:03.050 --> 00:03:05.370
+Que no reconocerá valores seguros
+
+70
+00:03:05.370 --> 00:03:08.343
+o formulará recomendaciones estadísticas conexas.
+
+71
+00:03:09.400 --> 00:03:12.350
+Ahora comenzando con la versión 2021.2,
+
+72
+00:03:12.350 --> 00:03:16.070
+un Creator o Explorer debe primero crear un Lens
+
+73
+00:03:16.070 --> 00:03:18.120
+para acceder a una fuente de datos publicada
+
+74
+00:03:18.120 --> 00:03:19.553
+utilizando Ask Data.
+
+75
+00:03:20.430 --> 00:03:23.710
+Una lente debe incluir campos relevantes para un
+
+76
+00:03:23.710 --> 00:03:26.803
+caso de uso identificado por el autor de Lens.
+
+77
+00:03:27.660 --> 00:03:30.530
+Los autores de lentes pueden crear sinónimos para campos,
+
+78
+00:03:30.530 --> 00:03:32.030
+para ayudar a los usuarios de negocios
+
+79
+00:03:32.030 --> 00:03:35.315
+a hacer preguntas utilizando el lenguaje natural.
+
+80
+00:03:35.315 --> 00:03:37.206
+Un ejemplo de un sinónimo podría ser
+
+81
+00:03:37.206 --> 00:03:38.900
+añadir las palabras mejor,
+
+82
+00:03:38.900 --> 00:03:41.300
+mejor rendimiento o superior,
+
+83
+00:03:41.300 --> 00:03:43.441
+para representar los cinco primeros resultados
+
+84
+00:03:43.441 --> 00:03:45.441
+de un conjunto de datos.
+
+85
+00:03:47.190 --> 00:03:48.023
+Ahora Ask Data
+
+86
+00:03:48.023 --> 00:03:50.970
+está estrechamente integrado con varios servicios
+
+87
+00:03:50.970 --> 00:03:52.345
+pero se basa especialmente
+
+88
+00:03:52.345 --> 00:03:55.350
+en dos procesamientos de lenguaje natural
+
+89
+00:03:55.350 --> 00:03:59.600
+o NLP, así como Elastic Server.
+
+90
+00:03:59.600 --> 00:04:03.160
+Este es un ejemplo de cómo Ask Data y Elastic Server
+
+91
+00:04:03.160 --> 00:04:08.160
+aparecen tanto en la IU web de TSM como en la CLI de TSM.
+
+92
+00:04:12.520 --> 00:04:14.980
+Ahora la función Ask Data se basa en
+
+93
+00:04:14.980 --> 00:04:17.850
+varios servicios de Tableau que trabajan juntos
+
+94
+00:04:17.850 --> 00:04:19.720
+que puedes ver aquí.
+
+95
+00:04:19.720 --> 00:04:23.280
+Estos incluyen servidor de datos, servidor VizQL,
+
+96
+00:04:23.280 --> 00:04:26.340
+Colombo que es parte del agente Tab Admin
+
+97
+00:04:26.340 --> 00:04:28.768
+que ayuda a los microservicios a encontrar cosas,
+
+98
+00:04:28.768 --> 00:04:33.768
+NLP, servidor elástico y modelo de contenido Microservice
+
+99
+00:04:34.460 --> 00:04:36.133
+o CMM para abreviar.
+
+100
+00:04:37.290 --> 00:04:38.381
+De forma predeterminada,
+
+101
+00:04:38.381 --> 00:04:42.290
+el proceso Ask Data se instalará en el nodo uno.
+
+102
+00:04:42.290 --> 00:04:45.720
+El servicio Ask Data no se puede configurar manualmente
+
+103
+00:04:45.720 --> 00:04:47.628
+y se ejecutará automáticamente
+
+104
+00:04:47.628 --> 00:04:50.486
+en cualquier nodo que ejecute el servidor de datos.
+
+105
+00:04:52.600 --> 00:04:54.860
+Ahora vamos a tomar un poco de una inmersión más profunda
+
+106
+00:04:54.860 --> 00:04:58.780
+en la arquitectura del proceso Ask Data
+
+107
+00:04:58.780 --> 00:05:02.510
+y los servicios de Tableau en los que se basa Ask Data.
+
+108
+00:05:02.510 --> 00:05:03.360
+El primero de estos
+
+109
+00:05:03.360 --> 00:05:07.154
+es el Procesamiento del Lenguaje Natural o PNL.
+
+110
+00:05:07.154 --> 00:05:10.000
+Ahora NLP es una capa de traducción
+
+111
+00:05:10.000 --> 00:05:13.440
+que ayuda al usuario a enviar una consulta a VizQL
+
+112
+00:05:13.440 --> 00:05:15.223
+sin arrastrar y caer.
+
+113
+00:05:16.120 --> 00:05:20.680
+NLP está estrechamente integrado con VizQL y Data Server.
+
+114
+00:05:20.680 --> 00:05:23.870
+Obtiene información de ambos Elastic Server
+
+115
+00:05:23.870 --> 00:05:26.450
+y Content Model Microservice,
+
+116
+00:05:26.450 --> 00:05:28.650
+pero Elastic Server y CMM
+
+117
+00:05:28.650 --> 00:05:31.493
+no se coordinan entre sí directamente.
+
+118
+00:05:32.600 --> 00:05:34.341
+Ask Data también registra
+
+119
+00:05:34.341 --> 00:05:36.930
+consultas de lenguaje natural emitidas por los usuarios
+
+120
+00:05:36.930 --> 00:05:39.548
+en los ficheros de registro del servicio NLP,
+
+121
+00:05:39.548 --> 00:05:41.953
+que es administrado por TSM.
+
+122
+00:05:46.510 --> 00:05:49.453
+A continuación, echemos un vistazo a Elastic Server.
+
+123
+00:05:50.380 --> 00:05:52.763
+So Elastic Server es un proceso de envoltura
+
+124
+00:05:52.763 --> 00:05:54.790
+para la búsqueda elástica
+
+125
+00:05:54.790 --> 00:05:57.365
+que es un motor de búsqueda estándar de código abierto
+
+126
+00:05:57.365 --> 00:05:59.670
+como SOLR.
+
+127
+00:05:59.670 --> 00:06:02.710
+Elastic Search es el proceso que ayuda a NLP
+
+128
+00:06:02.710 --> 00:06:04.670
+conocer la fuente de datos
+
+129
+00:06:04.670 --> 00:06:08.070
+recogiendo los campos y valores contenidos en los datos
+
+130
+00:06:08.070 --> 00:06:11.470
+para crear resultados de búsqueda más sensibles.
+
+131
+00:06:11.470 --> 00:06:14.528
+TSM gestiona la puesta en marcha, ejecución
+
+132
+00:06:14.528 --> 00:06:16.336
+y servicio de búsqueda elástica
+
+133
+00:06:16.336 --> 00:06:17.920
+a través de Elastic Server
+
+134
+00:06:17.920 --> 00:06:21.173
+y los datos también se almacenan en Elastic Server.
+
+135
+00:06:22.370 --> 00:06:24.170
+Ahora, cuando una fuente de datos ha cambiado
+
+136
+00:06:24.170 --> 00:06:25.720
+o se ha añadido,
+
+137
+00:06:25.720 --> 00:06:27.495
+se notifica a Elastic Server
+
+138
+00:06:27.495 --> 00:06:29.820
+que vuelva a aprender la fuente de datos.
+
+139
+00:06:29.820 --> 00:06:31.070
+Ahora, en este contexto,
+
+140
+00:06:31.070 --> 00:06:32.730
+aprender la fuente de datos significa
+
+141
+00:06:32.730 --> 00:06:35.900
+para proporcionar los datos para aprovechar las estadísticas
+
+142
+00:06:35.900 --> 00:06:38.573
+sobre el rango y la distribución de los datos.
+
+143
+00:06:39.430 --> 00:06:42.230
+Esto también saca categorías de dimensiones
+
+144
+00:06:42.230 --> 00:06:45.080
+y resume las medidas.
+
+145
+00:06:45.080 --> 00:06:48.700
+Ahora el rol de Elastic Servers de aprender los contenidos
+
+146
+00:06:48.700 --> 00:06:51.120
+de una fuente de datos publicada es esencial
+
+147
+00:06:51.120 --> 00:06:52.963
+para el tratamiento de Ask Data.
+
+148
+00:06:54.220 --> 00:06:55.700
+Los registros de búsqueda elástica
+
+149
+00:06:55.700 --> 00:07:00.090
+están en el directorio logs/elasticsearch.
+
+150
+00:07:00.090 --> 00:07:04.610
+Hay troncos registros específicos y registros stdout
+
+151
+00:07:04.610 --> 00:07:07.523
+que solo muestran las partes de inicio de los registros.
+
+152
+00:07:11.140 --> 00:07:11.973
+Ahora a continuación,
+
+153
+00:07:11.973 --> 00:07:16.430
+echemos un vistazo a Content Model Microservice o CMM.
+
+154
+00:07:16.430 --> 00:07:17.950
+Ahora CMM está desplegado
+
+155
+00:07:17.950 --> 00:07:21.023
+dentro del contenedor interactivo de microservicios.
+
+156
+00:07:22.150 --> 00:07:23.725
+Este servicio es responsable
+
+157
+00:07:23.725 --> 00:07:25.950
+de proporcionar la lista de campos
+
+158
+00:07:25.950 --> 00:07:30.010
+y metadatos asociados de una fuente de datos de Tableau
+
+159
+00:07:30.010 --> 00:07:33.390
+como el tipo de datos de los campos, el tipo de agregación,
+
+160
+00:07:33.390 --> 00:07:36.780
+fórmulas de cálculo, columnas remotas,
+
+161
+00:07:36.780 --> 00:07:39.770
+si está en una carpeta o jerarquía,
+
+162
+00:07:39.770 --> 00:07:42.509
+todo lo cual está escrito a Postgres.
+
+163
+00:07:42.509 --> 00:07:45.560
+Si ves algún problema con este servicio,
+
+164
+00:07:45.560 --> 00:07:46.393
+debes comprobar
+
+165
+00:07:46.393 --> 00:07:49.210
+para la carpeta de registros de Interactive Microservice
+
+166
+00:07:49.210 --> 00:07:50.583
+para más información.
+
+167
+00:07:51.480 --> 00:07:53.670
+Ahora el contenedor de microservicios interactivos
+
+168
+00:07:53.670 --> 00:07:57.190
+no es configurable y se implementa en nodos
+
+169
+00:07:57.190 --> 00:07:58.713
+que tienen VizPortal.
+
+170
+00:08:01.460 --> 00:08:04.850
+Así que cuando navegas por los registros de Ask Data,
+
+171
+00:08:04.850 --> 00:08:08.320
+Ask Data añade una capa adicional de procesamiento
+
+172
+00:08:08.320 --> 00:08:11.880
+a los procesos existentes de VizQL y servidor de datos
+
+173
+00:08:11.880 --> 00:08:14.783
+que se utilizan para construir una Viz en Tableau Server.
+
+174
+00:08:15.670 --> 00:08:19.080
+Una consulta de Ask Data atraviesa múltiples registros,
+
+175
+00:08:19.080 --> 00:08:21.810
+archivos como se ha cumplido,
+
+176
+00:08:21.810 --> 00:08:24.230
+incluyendo el Gateway, VizPortal,
+
+177
+00:08:24.230 --> 00:08:26.693
+Servidor de datos y VizQL Server.
+
+178
+00:08:27.750 --> 00:08:29.441
+Ahora el registro NLP
+
+179
+00:08:29.441 --> 00:08:31.833
+corresponde al proceso Ask Data en TSM.
+
+180
+00:08:33.440 --> 00:08:35.790
+Cuando el servicio NLP comienza,
+
+181
+00:08:35.790 --> 00:08:37.549
+imprimirá unas pocas líneas aquí
+
+182
+00:08:37.549 --> 00:08:39.590
+incluyendo una línea que dice
+
+183
+00:08:39.590 --> 00:08:42.130
+un servicio de lenguaje natural
+
+184
+00:08:42.130 --> 00:08:45.073
+que se muestra resaltado en naranja aquí en la pantalla.
+
+185
+00:08:45.950 --> 00:08:48.560
+Si la frase es un servicio de lenguaje natural
+
+186
+00:08:48.560 --> 00:08:50.850
+aparece más de una vez en los registros,
+
+187
+00:08:50.850 --> 00:08:53.853
+significa que el servicio NLP se reinició.
+
+188
+00:08:54.760 --> 00:08:56.569
+Así que una vez que todos los servicios de Ask Data
+
+189
+00:08:56.569 --> 00:08:57.410
+estén activos,
+
+190
+00:08:57.410 --> 00:09:02.030
+los registros imprimen la frase Listado del servidor GRPC,
+
+191
+00:09:02.030 --> 00:09:04.000
+escuchando en el puerto.
+
+192
+00:09:04.000 --> 00:09:07.433
+Esto indica que la PNL está encendida y funcionando.
+
+193
+00:09:08.720 --> 00:09:10.820
+Una clave que necesitarás para rastrear estos registros
+
+194
+00:09:10.820 --> 00:09:14.147
+es saber que el ID en los registros stdout_NLP
+
+195
+00:09:16.170 --> 00:09:18.830
+te llevará a la UUID
+
+196
+00:09:18.830 --> 00:09:23.143
+en los registros nativeapi_vizqlserver.
+
+197
+00:09:24.270 --> 00:09:27.110
+Así que al trabajar un caso de soporte para Ask Data
+
+198
+00:09:27.110 --> 00:09:28.610
+lo que quieres tratar de hacer
+
+199
+00:09:28.610 --> 00:09:31.280
+es identificar el ID de usuario correcto
+
+200
+00:09:31.280 --> 00:09:36.180
+el ID del guion de acción de subrayado del usuario final,
+
+201
+00:09:36.180 --> 00:09:40.550
+del registro stdout_nlp.
+
+202
+00:09:40.550 --> 00:09:43.020
+También debe utilizar marcas de tiempo para asegurarse de
+
+203
+00:09:43.020 --> 00:09:45.303
+que estás rastreando las peticiones correctas.
+
+204
+00:09:47.570 --> 00:09:49.900
+Ahora sé que era mucha información,
+
+205
+00:09:49.900 --> 00:09:51.770
+Así que vamos a resumir las principales conclusiones
+
+206
+00:09:51.770 --> 00:09:54.070
+para la resolución de problemas Ask Data.
+
+207
+00:09:54.070 --> 00:09:55.060
+Así que aquí hay algunas preguntas
+
+208
+00:09:55.060 --> 00:09:57.843
+que puedes preguntar mientras que la solución de problemas.
+
+209
+00:09:59.660 --> 00:10:02.740
+Puedes asegurarte de que todos los procesos necesarios
+
+210
+00:10:02.740 --> 00:10:04.820
+se ejecutan en Tableau Server,
+
+211
+00:10:04.820 --> 00:10:07.140
+se puede ver que Ask Data ha sido activado
+
+212
+00:10:07.140 --> 00:10:09.610
+a nivel de servidor o sitio.
+
+213
+00:10:09.610 --> 00:10:12.060
+¿Tiene el usuario permiso para la subyacente
+
+214
+00:10:12.060 --> 00:10:14.350
+fuente de datos publicada?
+
+215
+00:10:14.350 --> 00:10:17.120
+¿Se ha creado una lente para la fuente de datos pública,
+
+216
+00:10:17.120 --> 00:10:19.550
+a la que el cliente quiere acceder?
+
+217
+00:10:19.550 --> 00:10:21.950
+¿Tiene el cliente los permisos adecuados
+
+218
+00:10:21.950 --> 00:10:24.720
+para acceder a la fuente de datos publicada?
+
+219
+00:10:24.720 --> 00:10:27.537
+Si un cliente tiene problemas para crear una lente
+
+220
+00:10:27.537 --> 00:10:30.490
+¿son un explorador o un creador?
+
+221
+00:10:30.490 --> 00:10:33.100
+Y también puede rastrear una solicitud de usuario
+
+222
+00:10:33.100 --> 00:10:36.478
+utilizando la marca de tiempo ID y UUID
+
+223
+00:10:36.478 --> 00:10:38.220
+y que stdout_nlp
+
+224
+00:10:40.608 --> 00:10:41.717
+y registros del servidor nativeAPI_VizQL.
+
+225
+00:10:45.960 --> 00:10:46.820
+También ten en cuenta,
+
+226
+00:10:46.820 --> 00:10:49.770
+si tienes problemas adicionales con Ask Data,
+
+227
+00:10:49.770 --> 00:10:51.430
+puedes contactar con el equipo de desarrollo
+
+228
+00:10:51.430 --> 00:10:53.430
+para obtener ayuda sobre Slack
+
+229
+00:10:53.430 --> 00:10:56.883
+en el canal, pregunta-datos-ayuda.
+
+230
+00:10:59.230 --> 00:11:02.240
+Ahora, otra cosa a tener en cuenta es
+
+231
+00:11:02.240 --> 00:11:04.990
+que Ask Data no se puede configurar manualmente.
+
+232
+00:11:04.990 --> 00:11:07.780
+Sin embargo, Tableau ofrece recomendaciones
+
+233
+00:11:07.780 --> 00:11:09.196
+para garantizar que los clientes
+
+234
+00:11:09.196 --> 00:11:11.160
+obtengan los mejores resultados.
+
+235
+00:11:11.160 --> 00:11:13.510
+Estas recomendaciones incluyen
+
+236
+00:11:13.510 --> 00:11:15.118
+un mejor rendimiento
+
+237
+00:11:15.118 --> 00:11:16.960
+y soporte para conjuntos de datos más grandes,
+
+238
+00:11:16.960 --> 00:11:18.393
+los clientes deben utilizar Ask Data
+
+239
+00:11:18.393 --> 00:11:20.400
+con extractos publicados
+
+240
+00:11:20.400 --> 00:11:23.290
+en lugar de fuentes de datos en tiempo real.
+
+241
+00:11:23.290 --> 00:11:25.780
+Una lente solo debe incluir campos relevantes
+
+242
+00:11:25.780 --> 00:11:28.290
+a un caso de uso comercial específico,
+
+243
+00:11:28.290 --> 00:11:29.606
+y los autores de Lens
+
+244
+00:11:29.606 --> 00:11:31.130
+deben involucrar a los usuarios de negocios
+
+245
+00:11:31.130 --> 00:11:34.120
+para descubrir qué lentes necesitan.
+
+246
+00:11:34.120 --> 00:11:37.240
+Incluyendo hacer preguntas de
+
+247
+00:11:37.240 --> 00:11:39.230
+lo que la gente de negocios puede pedir
+
+248
+00:11:39.230 --> 00:11:40.933
+y lo que necesitan saber.
+
+249
+00:11:42.380 --> 00:11:43.620
+Hay consejos adicionales
+
+250
+00:11:43.620 --> 00:11:45.636
+sobre cómo los clientes pueden obtener
+
+251
+00:11:45.636 --> 00:11:46.870
+los mejores resultados de Ask Data.
+
+252
+00:11:46.870 --> 00:11:48.860
+Puedes revisar la página de ayuda en línea
+
+253
+00:11:48.860 --> 00:11:51.612
+titulada Optimizar datos para pedir datos,
+
+254
+00:11:51.612 --> 00:11:56.353
+y también lo vincularemos en el curso de formación adjunto.
+

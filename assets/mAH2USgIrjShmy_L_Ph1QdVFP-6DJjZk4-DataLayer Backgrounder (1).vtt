@@ -1,0 +1,246 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:00.900
+
+
+2
+00:00:00.900 --> 00:00:08.833
+Hello, and welcome to the overview of the Backgrounder & Non-interactive microservices.
+
+3
+00:00:08.833 --> 00:00:14.999
+For this section, we are going to talk about the backgrounder process.
+
+4
+00:00:15.000 --> 00:00:23.766
+Additionally, we are going to look at an example workflow for Backgrounder.  We will also look at how extracts work in the system,
+
+5
+00:00:23.766 --> 00:00:29.266
+and discuss non-interactive micro-services.
+
+6
+00:00:29.266 --> 00:00:33.399
+The backgrounder process handles scheduled jobs.
+
+7
+00:00:33.400 --> 00:00:41.166
+The most common one that we think about is extract refreshes, but it’s actually involved in any process that users want to run
+
+8
+00:00:41.166 --> 00:00:48.099
+on a scheduled interval, or that is required to keep the management of tableau server running smoothly.
+
+9
+00:00:48.100 --> 00:00:59.566
+This includes extract refreshes, and also active directory group sync, alerts, subscriptions, and file store jobs.
+
+10
+00:00:59.566 --> 00:01:07.332
+Now, extracts are the one most people think of when they hear backgrounder, so we can look at that first.
+
+11
+00:01:07.333 --> 00:01:12.033
+Every extract that is refreshed on a schedule or manually,
+
+12
+00:01:12.033 --> 00:01:16.599
+a job will be created in the repository’s background jobs table.
+
+13
+00:01:16.600 --> 00:01:23.333
+How this works is that every 10 seconds the backgrounder will check the table in the repository for the next
+
+14
+00:01:23.333 --> 00:01:30.566
+job that it needs to process.  When it hits a refresh task, an available backgrounder will take the task,
+
+15
+00:01:30.566 --> 00:01:35.832
+update the repository (making the status of the job in-progress),
+
+16
+00:01:35.833 --> 00:01:41.733
+whitelist any datasources involved, and use the platform code to render the view.
+
+17
+00:01:41.733 --> 00:01:46.733
+From there, Backgrounder parses the connection information in the workbook
+
+18
+00:01:46.733 --> 00:01:53.033
+or published datasource, and validates the connection to the current extract.
+
+19
+00:01:53.033 --> 00:02:01.399
+Now, to refresh an extract, first we create a new file for the new data, to prevent compromising an existing user session
+
+20
+00:02:01.400 --> 00:02:06.633
+or having potential errors compromise the existing extract file.
+
+21
+00:02:06.633 --> 00:02:12.633
+The new file is appended to the existing file if it is an incremental refresh,
+
+22
+00:02:12.633 --> 00:02:18.866
+or will eventually replace the existing file entirely if it is a full refresh.
+
+23
+00:02:18.866 --> 00:02:26.499
+The file needs to be created with the same structure as the existing file so the data will line up with the old version.
+
+24
+00:02:26.500 --> 00:02:33.733
+To get this info, we query the metadata of the existing extract - including columns, calculations,
+
+25
+00:02:33.733 --> 00:02:43.033
+data types, and other pertinent information.  To do this, backgrounder will contact the Data Engine.
+
+26
+00:02:43.033 --> 00:02:49.099
+Now that we know the details of how the data is structured, we can go out and get the new data.
+
+27
+00:02:49.100 --> 00:02:53.766
+Backgrounder will spin up a new Protocol Server process (if needed)
+
+28
+00:02:53.766 --> 00:03:00.299
+to connect to the external database, and send the required queries on to the external source.
+
+29
+00:03:00.300 --> 00:03:05.700
+As it retrieves the data, it will spin up a child data engine process,
+
+30
+00:03:05.700 --> 00:03:11.200
+to create and insert the data into a new temporary extract file.
+
+31
+00:03:11.200 --> 00:03:20.100
+Once the data is retrieved and written to the extract, the new extract is finalized, packaged, uploaded to its final location on the disk,
+
+32
+00:03:20.100 --> 00:03:26.066
+and the backgrounder updates the extract’s GUID in the postgreSQL repository.
+
+33
+00:03:26.066 --> 00:03:30.499
+It then marks the original refresh job as complete.
+
+34
+00:03:30.500 --> 00:03:37.000
+Another note here is that we don't always use a protocol server process to connect to data
+
+35
+00:03:37.000 --> 00:03:43.533
+sources, in which case the Backgrounder will connect to the data source directly.
+
+36
+00:03:43.533 --> 00:03:53.433
+Now, any active user sessions will continue using the old GUID and the original extract, and new sessions will go to the new GUID.
+
+37
+00:03:53.433 --> 00:04:00.066
+Once all user sessions for the old GUID expire, old extracts will be flagged for reaping.
+
+38
+00:04:00.066 --> 00:04:10.732
+In multi-node environments the new extract will also get a filestore sync job, to be available for all workers that need it.
+
+39
+00:04:10.733 --> 00:04:15.366
+Pretty much every backgrounder process will follow this workflow:
+
+40
+00:04:15.366 --> 00:04:19.066
+it will query postgres repository to determine a job,
+
+41
+00:04:19.066 --> 00:04:20.799
+assign the job,
+
+42
+00:04:20.800 --> 00:04:28.066
+contact or spawn child processes, and update postgres repository when complete.
+
+43
+00:04:28.066 --> 00:04:34.766
+Now here's an example:  if a subscription is called for, Backgrounder will check the repository,
+
+44
+00:04:34.766 --> 00:04:41.499
+render the viz, connect up to the configured SMTP server to email the recipients of the subscription,
+
+45
+00:04:41.500 --> 00:04:45.533
+and then update the jobs table to mark the job as complete.
+
+46
+00:04:45.533 --> 00:04:54.666
+For more details, check out the Life of a request pages on my Tableau.  (these will be linked in-training as well).
+
+47
+00:04:54.666 --> 00:04:59.332
+Now let’s take a look at the Non-Interactive Microservices.
+
+48
+00:04:59.333 --> 00:05:07.899
+These are services that respond to scheduled background requests.  They cannot be manually configured, but are bundled together.
+
+49
+00:05:07.900 --> 00:05:16.600
+These background requests can be longer-running and potentially require heavy system resource use.
+
+50
+00:05:16.600 --> 00:05:24.266
+One instance of the Non-Interactive Microservice Container is added to every node that has Backgrounder installed.
+
+51
+00:05:24.266 --> 00:05:28.932
+These Microservices include: Relationship Ingestor Microservice,
+
+52
+00:05:28.933 --> 00:05:38.266
+External Content Provider Microservice, Flow Provider Microservice, and the Content Provider Microservice.
+
+53
+00:05:38.266 --> 00:05:45.966
+Finally, let’s take a look at what the TSM Web UI and TSM CLI look like
+
+54
+00:05:45.966 --> 00:05:49.166
+for the non-interactive microservices.
+
+55
+00:05:49.166 --> 00:05:55.666
+For the Web UI, If all microservices on a node are up, they show with a green check,
+
+56
+00:05:55.666 --> 00:06:01.599
+if one or more is in an error state (but not all) it will show as degraded,
+
+57
+00:06:01.600 --> 00:06:07.066
+and if all microservices are stopped, it will show an error state.
+
+58
+00:06:07.066 --> 00:06:14.866
+If more granularity is needed, the TSM CLI will show individual statuses for each microservice.
+
+59
+00:06:14.866 --> 00:06:20.866
+So, if we want to know one specific status of a microservice, we can look at the command line interface for more information.
+
+60
+00:06:20.866 --> 00:06:27.932
+This has been an overview of Backgrounder and Interactive Microservices,
+
+61
+00:06:27.933 --> 00:06:29.266
+Thank you very much!
+

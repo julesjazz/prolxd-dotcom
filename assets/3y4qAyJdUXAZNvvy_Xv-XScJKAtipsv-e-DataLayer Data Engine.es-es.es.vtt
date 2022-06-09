@@ -1,0 +1,414 @@
+﻿WEBVTT
+
+1
+00:00:00.000 --> 00:00:01.120
+Motor de Datos y Almacén de Archivos
+
+2
+00:00:01.120 --> 00:00:03.300
+<v ->Hola, y bienvenidos a la descripción general</v>
+
+3
+00:00:03.300 --> 00:00:05.983
+del motor de datos y el almacén de archivos.
+
+4
+00:00:07.880 --> 00:00:08.955
+Para esta sección,
+
+5
+00:00:08.955 --> 00:00:11.520
+vamos a echar un vistazo al motor de datos,
+
+6
+00:00:11.520 --> 00:00:14.660
+para lo que usamos la base de datos Hyper.
+
+7
+00:00:14.660 --> 00:00:17.960
+También discutiremos cómo se usa el motor de datos,
+
+8
+00:00:17.960 --> 00:00:20.470
+hablar de llamadas de consulta federadas,
+
+9
+00:00:20.470 --> 00:00:23.423
+y discutir la funcionalidad del almacén de archivos también.
+
+10
+00:00:25.840 --> 00:00:28.497
+Podéis ver aquí un poco de visualización
+
+11
+00:00:28.497 --> 00:00:30.672
+de cómo el motor de datos y el almacén de archivos
+
+12
+00:00:30.672 --> 00:00:33.103
+funcionan con el resto de la capa de datos.
+
+13
+00:00:36.100 --> 00:00:39.170
+Primero, hablemos del motor de datos.
+
+14
+00:00:39.170 --> 00:00:41.500
+El motor de datos maneja la creación
+
+15
+00:00:41.500 --> 00:00:44.090
+y consulta de archivos de extracción.
+
+16
+00:00:44.090 --> 00:00:45.573
+Entonces funciona junto con el proceso
+
+17
+00:00:45.573 --> 00:00:47.950
+documentos de antecedentes y de almacenamiento de archivos.
+
+18
+00:00:47.950 --> 00:00:49.608
+Y también puede ser llamado
+
+19
+00:00:49.608 --> 00:00:51.300
+por el proceso del servidor de datos
+
+20
+00:00:51.300 --> 00:00:53.203
+cuando se publica un extracto.
+
+21
+00:00:54.110 --> 00:00:57.870
+El servidor VizQL lo llamará cuando necesite renderizar
+
+22
+00:00:57.870 --> 00:01:01.773
+una vista que utiliza el extracto como fuente de datos.
+
+23
+00:01:05.048 --> 00:01:07.140
+¿Qué es Hyper?
+
+24
+00:01:07.140 --> 00:01:09.840
+Hyper es una base de datos basada en columnas
+
+25
+00:01:09.840 --> 00:01:12.090
+y un proceso en memoria
+
+26
+00:01:12.090 --> 00:01:14.160
+que tiene importantes ventajas de velocidad
+
+27
+00:01:14.160 --> 00:01:16.560
+sobre el motor más antiguo que usaba Tableau,
+
+28
+00:01:16.560 --> 00:01:20.400
+especialmente para bases de datos con mayor número de filas.
+
+29
+00:01:20.400 --> 00:01:21.850
+Hyper también se llama
+
+30
+00:01:21.850 --> 00:01:24.963
+por otros procesos para crear extractos.
+
+31
+00:01:25.830 --> 00:01:27.772
+La Hyper API se puede utilizar
+
+32
+00:01:27.772 --> 00:01:28.910
+para automatizar interacciones
+
+33
+00:01:28.910 --> 00:01:31.840
+con archivos de extracción .hyper Tableau,
+
+34
+00:01:31.840 --> 00:01:33.698
+incluso para crear nuevos
+
+35
+00:01:33.698 --> 00:01:36.740
+o abrir archivos de extracción existentes.
+
+36
+00:01:36.740 --> 00:01:41.660
+Además, Hyper API puede agregar, eliminar, actualizar,
+
+37
+00:01:41.660 --> 00:01:44.673
+o leer datos de archivos .hyper.
+
+38
+00:01:46.670 --> 00:01:47.803
+También echemos un vistazo
+
+39
+00:01:47.803 --> 00:01:51.140
+a cuándo se usa el motor de datos.
+
+40
+00:01:51.140 --> 00:01:54.180
+Cuando Vizportal publica un extracto,
+
+41
+00:01:54.180 --> 00:01:56.290
+o fondo o actualiza uno,
+
+42
+00:01:56.290 --> 00:01:57.515
+se llama al motor de datos
+
+43
+00:01:57.515 --> 00:02:00.456
+para crear el archivo .hyper necesario.
+
+44
+00:02:01.300 --> 00:02:02.930
+El motor de datos también está involucrado
+
+45
+00:02:02.930 --> 00:02:05.913
+cuando necesitamos hacer llamadas de consulta federadas,
+
+46
+00:02:05.913 --> 00:02:07.010
+que es una consulta
+
+47
+00:02:07.010 --> 00:02:09.993
+de una base de datos donde recuperamos datos temporales.
+
+48
+00:02:10.840 --> 00:02:13.080
+Por ejemplo, si necesitamos recuperar datos
+
+49
+00:02:13.080 --> 00:02:15.910
+de dos fuentes de datos diferentes para un libro de trabajo,
+
+50
+00:02:15.910 --> 00:02:19.670
+federaremos la consulta a las dos fuentes de datos.
+
+51
+00:02:19.670 --> 00:02:21.840
+El motor de datos también es el motor
+
+52
+00:02:21.840 --> 00:02:23.673
+de federación de consultas del servidor de Tableau.
+
+53
+00:02:27.130 --> 00:02:28.071
+A continuación,
+
+54
+00:02:28.071 --> 00:02:30.020
+hablemos un poco sobre el almacén de archivos,
+
+55
+00:02:30.020 --> 00:02:33.350
+el cual almacena archivos, bastante sencillo.
+
+56
+00:02:33.350 --> 00:02:35.280
+Sin embargo, un poco más precisamente,
+
+57
+00:02:35.280 --> 00:02:37.440
+es responsable de manejar el almacenamiento
+
+58
+00:02:37.440 --> 00:02:38.815
+de archivos de extracción
+
+59
+00:02:38.815 --> 00:02:41.760
+a través del entorno del servidor de Tableau.
+
+60
+00:02:41.760 --> 00:02:44.480
+Esto significa que para un entorno de múltiples nodos,
+
+61
+00:02:44.480 --> 00:02:46.150
+el almacén de archivos se copiará
+
+62
+00:02:46.150 --> 00:02:49.200
+y sincronizará archivos entre nodos en el clúster,
+
+63
+00:02:49.200 --> 00:02:52.893
+por lo que cada trabajador tiene acceso a los extractos.
+
+64
+00:02:56.678 --> 00:03:00.620
+Cuando se publica o actualiza un nuevo extracto,
+
+65
+00:03:00.620 --> 00:03:02.236
+se creará un trabajo de sincronización
+
+66
+00:03:02.236 --> 00:03:03.620
+para copiar el nuevo archivo
+
+67
+00:03:03.620 --> 00:03:06.693
+a los demás trabajadores con un almacén de archivos.
+
+68
+00:03:07.530 --> 00:03:09.730
+Cuando un extracto es reemplazado por uno nuevo
+
+69
+00:03:09.730 --> 00:03:11.305
+con una actualización completa,
+
+70
+00:03:11.305 --> 00:03:13.783
+el almacén de archivos también procesará el trabajo
+
+71
+00:03:13.783 --> 00:03:16.540
+de cosecha resultante, eliminando el extracto
+
+72
+00:03:16.540 --> 00:03:19.030
+de todos los nodos configurados.
+
+73
+00:03:19.030 --> 00:03:19.863
+El almacén de archivos
+
+74
+00:03:19.863 --> 00:03:21.810
+también se llamará durante las copias de seguridad
+
+75
+00:03:21.810 --> 00:03:24.090
+para proporcionar los archivos de extracción.
+
+76
+00:03:24.090 --> 00:03:26.215
+Solo realizará una copia de seguridad
+
+77
+00:03:26.215 --> 00:03:27.150
+de un nodo de almacenamiento de archivos
+
+78
+00:03:27.150 --> 00:03:28.725
+durante una operación de copia de seguridad
+
+79
+00:03:28.725 --> 00:03:31.700
+en un entorno de varios nodos.
+
+80
+00:03:31.700 --> 00:03:33.166
+El desmantelamiento
+
+81
+00:03:33.166 --> 00:03:35.030
+pone la instancia del almacén de archivos
+
+82
+00:03:35.030 --> 00:03:37.380
+en un modo de solo lectura,
+
+83
+00:03:37.380 --> 00:03:39.790
+y copia cualquier dato único contenido
+
+84
+00:03:39.790 --> 00:03:41.940
+en esa instancia de almacenamiento de archivos
+
+85
+00:03:42.820 --> 00:03:46.230
+a otros almacenes de archivos en el clúster de nodos.
+
+86
+00:03:46.230 --> 00:03:49.710
+Si un cliente intenta eliminar el almacén de archivos
+
+87
+00:03:49.710 --> 00:03:51.920
+sin desmantelamiento previo,
+
+88
+00:03:51.920 --> 00:03:54.493
+se les pedirá que desactiven primero.
+
+89
+00:03:57.850 --> 00:04:00.560
+Una cosa a tener en cuenta es que el motor de datos
+
+90
+00:04:00.560 --> 00:04:03.510
+y el almacén de archivos trabajan en estrecha colaboración.
+
+91
+00:04:03.510 --> 00:04:07.650
+Sin embargo, no se contactan directamente entre sí.
+
+92
+00:04:07.650 --> 00:04:10.750
+En su lugar, proporcionan y obtienen información
+
+93
+00:04:10.750 --> 00:04:13.100
+al repositorio de datos.
+
+94
+00:04:13.100 --> 00:04:14.283
+Si el motor de datos
+
+95
+00:04:14.283 --> 00:04:17.352
+necesita saber dónde se almacena un extracto,
+
+96
+00:04:17.352 --> 00:04:19.518
+consultará el repositorio,
+
+97
+00:04:19.518 --> 00:04:22.851
+no el almacén de archivos directamente.
+
+98
+00:04:24.460 --> 00:04:26.326
+En resumen, el motor de datos
+
+99
+00:04:26.326 --> 00:04:28.750
+es el motor de consulta de la federación,
+
+100
+00:04:28.750 --> 00:04:32.440
+y el componente de consulta y creación de extractos.
+
+101
+00:04:32.440 --> 00:04:35.260
+El almacén de archivos es nuestro componente de replicación
+
+102
+00:04:35.260 --> 00:04:37.020
+que copia archivos de extracción
+
+103
+00:04:37.020 --> 00:04:39.513
+y los mantiene sincronizados en los nodos.
+

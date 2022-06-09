@@ -1,0 +1,586 @@
+﻿WEBVTT
+
+1
+00:00:01.040 --> 00:00:04.770
+<v ->Hola, y bienvenidos/as
+a la visión general</v>
+
+2
+00:00:04.770 --> 00:00:07.023
+y los microservicios no interactivos.
+
+3
+00:00:09.000 --> 00:00:09.960
+Para esta sección,
+
+4
+00:00:09.960 --> 00:00:13.023
+vamos a hablar sobre
+el proceso de backgrounder.
+
+5
+00:00:15.070 --> 00:00:16.910
+Además, vamos a ver
+
+6
+00:00:16.910 --> 00:00:20.140
+un ejemplo de flujo
+de trabajo para backgrounder.
+
+7
+00:00:20.140 --> 00:00:22.520
+También veremos cómo funcionan los extractos
+
+8
+00:00:22.520 --> 00:00:24.145
+en el sistema y hablaremos
+
+9
+00:00:24.145 --> 00:00:26.829
+de los microservicios no interactivos.
+
+10
+00:00:29.517 --> 00:00:33.460
+El proceso de backgrounder maneja trabajos programados.
+
+11
+00:00:33.460 --> 00:00:35.350
+El más común en el que pensamos
+
+12
+00:00:35.350 --> 00:00:37.340
+es el refresco de extractos,
+
+13
+00:00:37.340 --> 00:00:40.030
+pero en realidad está involucrado en cualquier proceso
+
+14
+00:00:40.030 --> 00:00:42.159
+que usuarios/as quieran en un intervalo programado
+
+15
+00:00:42.159 --> 00:00:45.140
+o que sea necesario para mantener la gestión
+
+16
+00:00:45.140 --> 00:00:48.160
+de tableau server funcionando sin problemas.
+
+17
+00:00:48.160 --> 00:00:50.510
+Esto incluye los refrescos de extractos,
+
+18
+00:00:50.510 --> 00:00:52.835
+y también la sincronización de grupos
+
+19
+00:00:52.835 --> 00:00:55.430
+del directorio activo, alertas, suscripciones
+
+20
+00:00:55.430 --> 00:00:57.343
+y trabajos de almacenamiento de archivos.
+
+21
+00:00:59.630 --> 00:01:03.150
+Ahora los extractos es en lo más piensa la gente
+
+22
+00:01:03.150 --> 00:01:05.090
+cuando escucha backgrounder,
+
+23
+00:01:05.090 --> 00:01:07.470
+así vemos eso primero.
+
+24
+00:01:07.470 --> 00:01:12.080
+Cada extracto que se actualiza en un horario o manualmente,
+
+25
+00:01:12.080 --> 00:01:13.230
+se crea un trabajo en la tabla de trabajos
+
+26
+00:01:13.230 --> 00:01:14.350
+en segundo plano de los repositorios
+
+27
+00:01:14.350 --> 00:01:15.823
+tabla de trabajos en segundo plano.
+
+28
+00:01:16.690 --> 00:01:19.160
+Cómo funciona esto es que cada 10 segundos
+
+29
+00:01:19.160 --> 00:01:20.890
+el servidor de fondo comprobará la tabla
+
+30
+00:01:20.890 --> 00:01:23.206
+en el repositorio para el próximo trabajo
+
+31
+00:01:23.206 --> 00:01:25.340
+que necesita procesar.
+
+32
+00:01:25.340 --> 00:01:27.450
+Cuando encuentre una tarea de refresco
+
+33
+00:01:27.450 --> 00:01:30.075
+un servidor de fondo disponible tomará la tarea,
+
+34
+00:01:30.075 --> 00:01:33.670
+actualiza el repositorio, haciendo que el estado
+
+35
+00:01:33.670 --> 00:01:36.428
+de la tarea en curso, pondrá en la lista blanca
+
+36
+00:01:36.428 --> 00:01:38.610
+cualquier fuente de datos involucrada,
+
+37
+00:01:38.610 --> 00:01:39.918
+y utilizará el código de la plataforma
+
+38
+00:01:39.918 --> 00:01:41.810
+para renderizar la vista.
+
+39
+00:01:41.810 --> 00:01:45.540
+A partir de ahí, el fondo analiza la información de conexión
+
+40
+00:01:45.540 --> 00:01:48.130
+en el libro de trabajo o
+la fuente de datos publicada
+
+41
+00:01:48.130 --> 00:01:51.123
+y valida la conexión con el extracto actual.
+
+42
+00:01:53.100 --> 00:01:55.140
+Ahora para refrescar un extracto,
+
+43
+00:01:55.140 --> 00:01:57.820
+primero creamos un nuevo archivo para los datos
+
+44
+00:01:57.820 --> 00:02:01.440
+para evitar comprometer una sesión de usuario existente
+
+45
+00:02:01.440 --> 00:02:03.610
+o que los errores potenciales comprometan
+
+46
+00:02:03.610 --> 00:02:06.700
+el archivo de extracto existente.
+
+47
+00:02:06.700 --> 00:02:10.140
+El nuevo archivo se anexa al archivo existente
+
+48
+00:02:10.140 --> 00:02:12.700
+si se trata de una actualización incremental,
+
+49
+00:02:12.700 --> 00:02:14.525
+o eventualmente reemplazará
+
+50
+00:02:14.525 --> 00:02:16.525
+el archivo existente por completo
+
+51
+00:02:16.525 --> 00:02:17.973
+si se trata de una actualización completa.
+
+52
+00:02:18.950 --> 00:02:21.770
+El fichero debe crearse con la misma estructura
+
+53
+00:02:21.770 --> 00:02:24.760
+que el archivo existente
+para que los datos se alineen
+
+54
+00:02:24.760 --> 00:02:26.570
+con la versión antigua.
+
+55
+00:02:26.570 --> 00:02:29.120
+Para obtener esta información, consultamos los metadatos
+
+56
+00:02:29.120 --> 00:02:33.780
+del extracto existente, incluyendo columnas, cálculos
+
+57
+00:02:33.780 --> 00:02:36.583
+tipos de datos y otra información pertinente.
+
+58
+00:02:37.420 --> 00:02:39.537
+Para ello, el programa de apoyo se pondrá
+
+59
+00:02:39.537 --> 00:02:41.812
+en contacto con el motor de datos.
+
+60
+00:02:43.118 --> 00:02:44.526
+Ahora que conocemos los detalles
+
+61
+00:02:44.526 --> 00:02:46.200
+de cómo están estructurados los datos,
+
+62
+00:02:46.200 --> 00:02:49.180
+podemos salir a buscar los nuevos datos.
+
+63
+00:02:49.180 --> 00:02:50.796
+El programa de fondo pondrá en marcha
+
+64
+00:02:50.796 --> 00:02:52.410
+un nuevo proceso de servidor de protocolo
+
+65
+00:02:52.410 --> 00:02:56.040
+si es necesario para conectarse a la base de datos externa
+
+66
+00:02:56.040 --> 00:03:00.380
+y enviar las consultas necesarias a la fuente externa.
+
+67
+00:03:00.380 --> 00:03:03.400
+A medida que se recuperan los datos, se iniciará
+
+68
+00:03:03.400 --> 00:03:07.240
+un proceso de motor de datos hijo para crear e insertar
+
+69
+00:03:07.240 --> 00:03:10.423
+los datos en un nuevo archivo de extracción temporal.
+
+70
+00:03:11.380 --> 00:03:14.530
+Una vez recuperados los datos y escritos en el extracto
+
+71
+00:03:14.530 --> 00:03:18.240
+el nuevo extracto es finalizado, empaquetado, cargado
+
+72
+00:03:18.240 --> 00:03:21.830
+a su ubicación final en el disco y el backgrounder actualiza
+
+73
+00:03:21.830 --> 00:03:26.140
+el GUID del extracto en el repositorio de Postgres.
+
+74
+00:03:26.140 --> 00:03:28.182
+Ahora, marca el trabajo de actualización original
+
+75
+00:03:28.182 --> 00:03:29.190
+como completo.
+
+76
+00:03:30.680 --> 00:03:32.840
+Otra nota aquí es que no siempre
+
+77
+00:03:32.840 --> 00:03:34.448
+usamos un proceso de servidor de protocolo
+
+78
+00:03:34.448 --> 00:03:36.480
+para conectarnos a las fuentes de datos.
+
+79
+00:03:36.480 --> 00:03:38.340
+En este caso, el servidor de fondo se conectará
+
+80
+00:03:38.340 --> 00:03:40.713
+a la fuente de datos directamente.
+
+81
+00:03:43.600 --> 00:03:46.530
+Cualquier sesión de usuario activa continuará usando
+
+82
+00:03:46.530 --> 00:03:49.530
+el antiguo GUID y el extracto original
+
+83
+00:03:49.530 --> 00:03:53.490
+y las nuevas sesiones irán al nuevo GUID.
+
+84
+00:03:53.490 --> 00:03:55.715
+Una vez que expiren todas las sesiones de usuario
+
+85
+00:03:55.715 --> 00:03:57.240
+para el antiguo GUID,
+
+86
+00:03:57.240 --> 00:03:59.383
+los extractos antiguos se marcarán para ser cosechados.
+
+87
+00:04:00.220 --> 00:04:03.500
+En entornos de varios nodos, para el nuevo extracto
+
+88
+00:04:03.500 --> 00:04:05.208
+también se obtendrá un trabajo de sincronización
+
+89
+00:04:05.208 --> 00:04:06.760
+del almacén de archivos para que esté disponible
+
+90
+00:04:06.760 --> 00:04:08.263
+para todos los trabajadores que lo necesiten.
+
+91
+00:04:10.880 --> 00:04:13.070
+Prácticamente todos los procesos de fondo
+
+92
+00:04:13.070 --> 00:04:15.440
+seguirán este flujo de trabajo.
+
+93
+00:04:15.440 --> 00:04:16.931
+Consultará el repositorio Postgres
+
+94
+00:04:16.931 --> 00:04:19.160
+para determinar un trabajo,
+
+95
+00:04:19.160 --> 00:04:24.160
+asigna el trabajo, contacta o genera procesos hijos
+
+96
+00:04:24.270 --> 00:04:27.183
+y actualiza el repositorio de Postgres cuando se completa.
+
+97
+00:04:28.150 --> 00:04:29.870
+Aquí hay un ejemplo,
+
+98
+00:04:29.870 --> 00:04:32.230
+si se pide una suscripción,
+
+99
+00:04:32.230 --> 00:04:34.510
+backgrounder comprobará el repositorio,
+
+100
+00:04:34.510 --> 00:04:36.676
+renderizará el Viz, se conectará
+
+101
+00:04:36.676 --> 00:04:38.743
+con el servidor SMTP configurado
+
+102
+00:04:38.743 --> 00:04:39.884
+para enviar un correo electrónico
+
+103
+00:04:39.884 --> 00:04:41.520
+a los destinatarios de la suscripción
+
+104
+00:04:41.520 --> 00:04:43.070
+y luego actualiza la tabla de trabajos
+
+105
+00:04:43.070 --> 00:04:45.590
+para marcar el trabajo como completo.
+
+106
+00:04:45.590 --> 00:04:47.465
+Para más detalles, consulta la página
+
+107
+00:04:47.465 --> 00:04:48.856
+de la vida de una solicitud
+
+108
+00:04:48.856 --> 00:04:52.563
+en mi tableau, que también
+se enlazará en esta formación.
+
+109
+00:04:54.720 --> 00:04:56.236
+Vamos a echar un vistazo
+
+110
+00:04:56.236 --> 00:04:58.486
+a los Microservicios no interactivos.
+
+111
+00:04:59.390 --> 00:05:01.010
+Estos son servicios que responden
+
+112
+00:05:01.010 --> 00:05:03.490
+a peticiones programadas en segundo plano.
+
+113
+00:05:03.490 --> 00:05:05.748
+No pueden ser configurados manualmente
+
+114
+00:05:05.748 --> 00:05:08.090
+sino que están agrupados.
+
+115
+00:05:08.090 --> 00:05:12.280
+Estas peticiones en segundo plano son de larga duración
+
+116
+00:05:12.280 --> 00:05:14.238
+y potencialmente requerir un gran uso
+
+117
+00:05:14.238 --> 00:05:15.888
+de recursos del sistema.
+
+118
+00:05:16.750 --> 00:05:19.720
+Ahora una instancia del Microservicio No Interactivo
+
+119
+00:05:19.720 --> 00:05:23.000
+se agrega a cada nodo que tiene instalado el backgrounder
+
+120
+00:05:23.000 --> 00:05:24.430
+instalado.
+
+121
+00:05:24.430 --> 00:05:26.350
+Estos microservicios incluyen,
+
+122
+00:05:26.350 --> 00:05:29.000
+Microservicio Ingestor de Relaciones,
+
+123
+00:05:29.000 --> 00:05:31.910
+Microservicio Proveedor de Contenido Externo,
+
+124
+00:05:31.910 --> 00:05:33.870
+Microservicio Proveedor de Flujo
+
+125
+00:05:33.870 --> 00:05:36.103
+y el Microservicio Proveedor de Contenido.
+
+126
+00:05:38.380 --> 00:05:41.989
+Por último, veamos el aspecto de la interfaz web de TSM
+
+127
+00:05:41.989 --> 00:05:46.040
+así como la interfaz de línea de comandos de TSM
+
+128
+00:05:46.040 --> 00:05:47.940
+para los microservicios no interactivos.
+
+129
+00:05:49.480 --> 00:05:50.963
+En el caso de la interfaz web,
+
+130
+00:05:50.963 --> 00:05:53.370
+si todos los microservicios de una nota están activos
+
+131
+00:05:53.370 --> 00:05:55.730
+se mostrarán con una marca verde,
+
+132
+00:05:55.730 --> 00:05:59.570
+si uno o más están en estado de error pero no todos
+
+133
+00:05:59.570 --> 00:06:01.690
+se mostrará como degradado,
+
+134
+00:06:01.690 --> 00:06:03.940
+y si todos los microservicios
+están parados
+
+135
+00:06:03.940 --> 00:06:05.823
+se mostrará un estado de error.
+
+136
+00:06:07.100 --> 00:06:09.350
+Si se necesita más granularidad
+
+137
+00:06:09.350 --> 00:06:13.130
+el TSM CLI mostrará estados individuales
+
+138
+00:06:13.130 --> 00:06:14.930
+para cada microservicio.
+
+139
+00:06:14.930 --> 00:06:19.450
+Si queremos saber un estado específico de un microservicio,
+
+140
+00:06:19.450 --> 00:06:21.190
+podemos buscar en la interfaz de línea de comandos
+
+141
+00:06:21.190 --> 00:06:22.940
+para obtener más información.
+
+142
+00:06:22.940 --> 00:06:24.480
+Esto ha sido una visión general
+
+143
+00:06:24.480 --> 00:06:27.073
+de los microservicios
+de fondo y no interactivos.
+
+144
+00:06:28.000 --> 00:06:29.153
+Muchas gracias.
+

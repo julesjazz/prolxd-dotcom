@@ -1,0 +1,433 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:08.566
+Hello, welcome to the overview of Ask Data for a technical audience.
+This video has been created for
+
+2
+00:00:08.566 --> 00:00:16.132
+anyone needing to understand Ask Data from a technical perspective.
+So, for this section, we will look at how
+
+3
+00:00:16.133 --> 00:00:23.033
+Ask Data functions at a high level - before diving into a description of the underlying process architecture.
+
+4
+00:00:23.033 --> 00:00:29.566
+We’ll also look at some resources that can help customers obtain the best results when using Ask Data.
+
+5
+00:00:29.566 --> 00:00:40.899
+The Ask Data feature was introduced in Tableau 2019.1, with major enhancements to Ask Data subsequently delivered in 2021.2.
+
+6
+00:00:40.900 --> 00:00:48.133
+Ask Data allows customers to use natural language
+to ask questions and produce insights directly
+
+7
+00:00:48.133 --> 00:00:52.366
+from any data source
+published on Tableau Server or Tableau Online.
+
+8
+00:00:52.366 --> 00:00:58.799
+Ask Data enables customers to type a question into a text box
+using natural language
+
+9
+00:00:58.800 --> 00:01:02.233
+and Tableau will produce an answer in the form of a Viz.
+
+10
+00:01:02.233 --> 00:01:11.366
+Ask Data supports many of the analytical capabilities of Tableau, including grouping, sorting, filtering and aggregations.
+
+11
+00:01:11.366 --> 00:01:17.166
+If you would like an excellent introduction and overview of Ask Data,
+
+12
+00:01:17.166 --> 00:01:23.566
+you can view the presentation delivered by Product Manager
+Jared Briskman at Tableau Conference 2021,
+
+13
+00:01:23.566 --> 00:01:25.566
+which is linked in this course.
+
+14
+00:01:25.566 --> 00:01:35.932
+Lenses are a new content type, like a published workbook or Prep flow, specifically for Ask Data,
+
+15
+00:01:35.933 --> 00:01:39.499
+and are required for versions 2021.2 and on.
+
+16
+00:01:39.500 --> 00:01:45.766
+Lenses are created on top of published data sources, and allow for the curation and governance
+
+17
+00:01:45.766 --> 00:01:50.666
+of Ask Data use cases, while maintaining the source of truth of the data source.
+
+18
+00:01:50.666 --> 00:01:59.166
+A published data source can have no lenses (which is the default), a single lens, or multiple lenses.
+
+19
+00:01:59.166 --> 00:02:08.532
+Lenses allow for the curation of Ask Data, and introduce the ability to select which fields are available for the Ask Data user.
+
+20
+00:02:08.533 --> 00:02:17.199
+Lenses must be authored by Explorer or Creator licensed users, but are accessible by viewers.
+
+21
+00:02:17.200 --> 00:02:23.033
+The bottom line of this is that: no lens means no Ask Data access.
+
+22
+00:02:23.033 --> 00:02:31.133
+Let’s take a look at what’s needed to interact with Ask Data on Tableau Server or Tableau Online.
+
+23
+00:02:31.133 --> 00:02:36.466
+Ask Data requires a published data source, and to use Ask Data,
+
+24
+00:02:36.466 --> 00:02:40.732
+users must have permission to connect to the underlying data source.
+
+25
+00:02:40.733 --> 00:02:48.866
+One thing to keep in mind is that If a data source has row-level permissions,
+those permissions also apply to Ask Data,
+
+26
+00:02:48.866 --> 00:02:54.532
+which won’t recognize secure values or make related statistical recommendations.
+
+27
+00:02:54.533 --> 00:03:05.966
+Now, starting with version 2021.2, a Creator or Explorer must first author a “Lens” to access a published datasource using Ask Data.
+
+28
+00:03:05.966 --> 00:03:13.399
+A Lens should include fields relevant to a specific use case identified by the Lens Author.
+
+29
+00:03:13.400 --> 00:03:19.466
+Lens authors can create “synonyms” for fields to help business users ask questions using natural language.
+
+30
+00:03:19.466 --> 00:03:26.099
+An example of a “synonym” might be to add the words “best” “best performing”
+or “top”
+
+31
+00:03:26.100 --> 00:03:29.566
+to represent the TOP 5 results from a dataset.
+
+32
+00:03:29.566 --> 00:03:37.932
+Ask Data is tightly integrated with several services, but it relies especially on two:
+
+33
+00:03:37.933 --> 00:03:43.366
+Natural Language Processing, or NLP, as well as Elastic Server.
+
+34
+00:03:43.366 --> 00:03:53.199
+Here’s an example of how Ask Data and Elastic Server appear in the TSM Web UI and in the TSM CLI.
+
+35
+00:03:53.200 --> 00:04:05.366
+The Ask Data feature relies on several Tableau services working together, which you
+can see here.
+
+36
+00:04:05.366 --> 00:04:11.599
+These include Data Server, as well as VizQL Server,
+Columbo, which is a part of TabAdmin agent
+
+37
+00:04:11.600 --> 00:04:20.766
+which helps microservices find things, NLP,
+Elastic Server, and Content Model Microservice, or CMM for short.
+
+38
+00:04:20.766 --> 00:04:25.766
+By default, the Ask Data processes install to node 1.
+
+39
+00:04:25.766 --> 00:04:32.632
+The Ask Data service can not be configured manually
+and will run automatically on any node running
+
+40
+00:04:32.633 --> 00:04:34.399
+Data Server.
+
+41
+00:04:34.400 --> 00:04:40.966
+Now, we're going to take a look at the Tableau services which Ask Data relies on.
+
+42
+00:04:40.966 --> 00:04:47.166
+Ask Data is Natural Language Processing, which is abbreviated NLP.
+
+43
+00:04:47.166 --> 00:04:54.966
+This is a translation layer that helps the user submit a query into Vizql without dragging and dropping.
+
+44
+00:04:54.966 --> 00:04:59.532
+Ask Data is tightly integrated with Vizql and DataServer.
+
+45
+00:04:59.533 --> 00:05:04.399
+It gets information from both Elastic Server and Content Model Microservice (CMM),
+
+46
+00:05:04.400 --> 00:05:11.166
+but Elastic Server and CMM do not coordinate with each other directly, which we'll cover a little bit later.
+
+47
+00:05:11.166 --> 00:05:20.832
+Ask Data logs natural language queries issued by users in log files for the NLP service, which is managed by TSM.
+
+48
+00:05:20.833 --> 00:05:26.566
+Next up, let's take a look at Elastic Server.
+
+49
+00:05:26.566 --> 00:05:34.166
+Elastic Server is a wrapper process for elastic search, which is a standard, open source search engine, like SOLR.
+
+50
+00:05:34.166 --> 00:05:39.766
+Elasticsearch is the process that helps Ask Data "learn" the data source,
+
+51
+00:05:39.766 --> 00:05:45.666
+by collecting the fields
+and values contained in the data to create more responsive search results.
+
+52
+00:05:45.666 --> 00:05:55.832
+TSM manages starting, running and serving elasticsearch through Elastic Server, and the data is stored on Elastic Server.
+
+53
+00:05:55.833 --> 00:06:03.766
+When a datasource has changed or been added,
+Elastic Server is notified to relearn the data source.
+
+54
+00:06:03.766 --> 00:06:12.566
+Now in this context, learning the data source
+means to profile the data to leverage statistics about the range and distribution of the data.
+
+55
+00:06:12.566 --> 00:06:17.599
+This also pulls out categories from dimensions and summarizes measures.
+
+56
+00:06:17.600 --> 00:06:25.800
+The Elastic Server’s role of learning the contents of a published data source is essential for the processing of Ask Data.
+
+57
+00:06:25.800 --> 00:06:32.100
+The logs of elastic search are in the
+logs/elasticsearch directory.
+
+58
+00:06:32.100 --> 00:06:40.000
+There are elastic specific logs, and stdout logs that only show the startup part of the logs.
+
+59
+00:06:40.000 --> 00:06:49.466
+Now let’s take a look at Content Model Microservice, or CMM.
+CMM is deployed inside the Interactive
+
+60
+00:06:49.466 --> 00:06:51.299
+Microservice Container.
+
+61
+00:06:51.300 --> 00:06:57.233
+This service is responsible for providing the list of fields
+and associated metadata
+
+62
+00:06:57.233 --> 00:07:04.699
+from a Tableau Data Source, such as the field’s data type, aggregation type,
+calculation formulas,
+
+63
+00:07:04.700 --> 00:07:12.100
+remote columns, whether it's in a folder or hierarchy, all of which is written to PostgresQL.
+
+64
+00:07:12.100 --> 00:07:20.600
+If you see any problems with this service, you should check the Interactive Microservice Logs folder for more information.
+
+65
+00:07:20.600 --> 00:07:27.766
+Now, the Interactive Microservices Container is not configurable and is deployed on nodes that have vizportal.
+
+66
+00:07:27.766 --> 00:07:33.366
+Now let's look at Navigating logs for Ask Data.
+
+67
+00:07:33.366 --> 00:07:40.232
+Ask Data adds an additional layer of processing to the existing Vizql and Data Server
+Processes
+
+68
+00:07:40.233 --> 00:07:43.199
+that are used to build a viz on Tableau Server.
+
+69
+00:07:43.200 --> 00:07:47.800
+An Ask Data query traverses multiple log
+files as it is fulfilled,
+
+70
+00:07:47.800 --> 00:07:53.666
+including the Gateway, VizPortal, Data Server, and VizQLServer.
+
+71
+00:07:53.666 --> 00:08:00.299
+The NLP log corresponds to the Ask Data process in TSM.
+
+72
+00:08:00.300 --> 00:08:07.666
+When the NLP (or Ask Data) service starts,
+it will print the text “A natural language service”,
+
+73
+00:08:07.666 --> 00:08:10.866
+which is shown highlighted in orange here on the screen.
+
+74
+00:08:10.866 --> 00:08:19.366
+If the phrase "A natural language service" appears more than once in the logs, it means that the Ask Data service was restarted.
+
+75
+00:08:19.366 --> 00:08:27.599
+Once all the Ask Data services are active, the logs print the phrase “GRPC server listening on port”
+
+76
+00:08:27.600 --> 00:08:31.500
+- this indicates that the NLP is on and running.
+
+77
+00:08:31.500 --> 00:08:42.300
+One key you'll need to trace these logs is to know that the ID in the stdout_nlp logs will lead you to the UUID
+
+78
+00:08:42.300 --> 00:08:46.233
+in the nativeapi_vizqlserver logs.
+
+79
+00:08:46.233 --> 00:08:55.099
+When working a support case for Ask Data,
+try to identify the correct User ID (nuser_action-id).
+
+80
+00:08:55.100 --> 00:08:58.666
+from the stdout_nlp log.
+
+81
+00:08:58.666 --> 00:09:04.132
+You should also use timestamps to make sure you are tracking the right requests.
+
+82
+00:09:04.133 --> 00:09:08.599
+Now, I know that was a lot of information in a short amount of time,
+
+83
+00:09:08.600 --> 00:09:13.266
+so let’s summarize a few of the key takeaways for Troubleshooting Ask Data:
+
+84
+00:09:13.266 --> 00:09:19.866
+We need to ensure that all of the necessary processes are running on Tableau Server.
+
+85
+00:09:19.866 --> 00:09:25.166
+We can ask the questions: Has Ask Data been enabled at the Server/Site-Level?
+
+86
+00:09:25.166 --> 00:09:29.932
+Does the user have permission to the underlying published data source?
+
+87
+00:09:29.933 --> 00:09:35.199
+Has a Lens been created for the published data source the customer wants to access?
+
+88
+00:09:35.200 --> 00:09:40.866
+Does the customer have the appropriate permissions to access the published data source?
+
+89
+00:09:40.866 --> 00:09:47.399
+If a customer is having trouble authoring a Lens, are they an Explorer or Creator?
+
+90
+00:09:47.400 --> 00:09:54.466
+You can also Trace a user request using a timestamp, ID and UUID
+
+91
+00:09:54.466 --> 00:10:00.932
+in the stdout_nlp and nativeapi_vizqlserver logs
+
+92
+00:10:00.933 --> 00:10:10.733
+If you run into additional issues with Ask Data, you can reach out to the dev team for help on slack in #ask-data-help.
+
+93
+00:10:10.733 --> 00:10:17.599
+Now keep in mind that Ask Data can not be manually configured,
+
+94
+00:10:17.600 --> 00:10:23.000
+however, Tableau does provide recommendations to ensure that customers get the best results.
+
+95
+00:10:23.000 --> 00:10:32.566
+For improved performance and support for large data sets, customers should use Ask Data with published extracts rather than live data sources.
+
+96
+00:10:32.566 --> 00:10:37.799
+A Lens should only include fields relevant to a specific business use case.
+
+97
+00:10:37.800 --> 00:10:43.400
+Lens Authors should engage business users to discover which Lenses they need:
+
+98
+00:10:43.400 --> 00:10:47.966
+They should see, What questions do business people ask?
+
+99
+00:10:47.966 --> 00:10:49.566
+What do they need to know?
+
+100
+00:10:49.566 --> 00:10:54.566
+For additional tips on how customers can get the best results from Ask Data,
+
+101
+00:10:54.566 --> 00:11:02.266
+review the Online Help page titled “Optimize Data for Ask Data”, which is also linked in this training.
+
+102
+00:11:02.266 --> 00:11:08.366
+Thank you very much for your time, this has been an overview of Ask Data for a technical audience.
+
