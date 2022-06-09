@@ -66,7 +66,7 @@ html {
 
 .callout {
   background-color: #f2f2f2;
-  padding: 2rem;
+  padding: 1rem;
   margin: 0 auto;
   border-radius: 12px;
   text-align: center;
@@ -81,12 +81,19 @@ html {
   text-decoration: none;
   text-transform: uppercase;
   border-radius: 2rem;
-  color: #313537;
   border: 0px;
-  padding: 0 3rem;
+  padding: 0 2rem;
   outline: 0;
   transition: opacity .3s;
 }
+
+@media (max-width: 840px) {
+  .course-button {
+    letter-spacing: normal;
+    font-weight: 700;
+  }
+}
+
 .course-button:hover {
   color: #61727a;
 }
